@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование пользователя</title>
+</head>
+<body>
+    <h1>управление пользователями</h1>
+    <nav>
+        <a href="/admin">Главная</a> | 
+        <a href="/admin/users">Пользователи</a> | 
+        <a href="/admin/posts">Посты</a> | 
+        <a href="/">На сайт</a> | 
+    </nav>
+
+    <hr>
+    <form action="/admin/user/edit{{ user[0] }}" method="POST">
+        <div>
+            <label for="title">Имя</label>
+            <input type="text" id="name" name="name" value="{{ user[1] }}" required>
+        </div>
+        <div>
+            <label for="role">Роль</label>
+            <select name="role" id="role" required>
+                <option value="user" {% if user[5] == 'user' %} selected {% endif %}>Пользователь</option>
+                <option value="admin" {% if user[5] == 'admin' %} selected {% endif %}>Администратор</option>
+            </select>
+        </div>
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" id="email" value="{{ user[2] }}" required>
+        </div>
+        <div>
+            <button type="submit">Сохранить изменения</button>
+            <a href="/admin/users">Отмена</a>
+        </div>
+    </form>
+</body>
+</html>

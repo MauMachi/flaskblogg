@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+</head>
+<body>
+    <h1>Админ-панель</h1>
+    <p>Вы вошли как: <strong>{{ user_name }}</strong> (Администратор)</p>
+    <nav>
+        <a href="/admin">Главная</a> | 
+        <a href="/admin/users">Пользователи</a> | 
+        <a href="/admin/posts">Посты</a> | 
+        <a href="/">На сайт</a> | 
+        <a href="/logout">Выйти</a>
+    </nav>
+    <hr>
+    <h2>Статистика</h2>
+    <ul>
+        <li>Пользователей: {{ user_count }}</li>
+        <li>Постов: {{ post_count }}</li>
+        <li>Категорий: {{ category_count }}</li>
+        <li>Уведомлений: {{ notification_count }}</li>
+    </ul>
+    <h2>Последние действия</h2>
+    {% if recent_actions %}
+    <ul>
+        {% for action in recent_actions %}
+        <li>
+            <strong>{{ action[2] }}</strong>: {{ action[3] }} 
+            ({{ action[5] }}) <em>— {{ action[6] }}</em>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Нет действий для отображения.</p>
+    {% endif %}
+</body>
+</html>

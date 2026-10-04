@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование поста</title>
+</head>
+<body>
+    <h1>Редактирование поста</h1>
+    <nav>
+        <a href="/admin">Главная</a> | 
+        <a href="/admin/users">Пользователи</a> | 
+        <a href="/admin/posts">Посты</a> | 
+        <a href="/">На сайт</a> | 
+        <a href="/logout">Выйти</a>
+    </nav>
+
+    <hr>
+    <form action="/admin/post/edit{{ post[0] }}" method="POST">
+        <div>
+            <label for="title">Заголовок</label>
+            <input type="text" id="title" name="title" value="{{ post[1] }}" required style="width: 500px;">
+        </div>
+        <div>
+            <label for="category">Категория</label>
+            <select name="category" id="category" required>
+                <option value="">Выберите категорию</option>
+                {% for category in categories %}
+                <option value="{{ category[0] }}"
+                        {% if category[0] == post[4] %} selected {% endif %}>
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="content">Содержание:</label><br>
+            <textarea name="content" id="content" rows="15" style="width: 500;" required>{{ post[2] }}</textarea>
+        </div>
+        <div>
+            <button type="submit">Сохранить изменения</button>
+            <a href="/admin/post">Отмена</a>
+        </div>
+    </form>
+</body>
+</html>
